@@ -61,7 +61,7 @@ function checksTodoExists(request, response, next) {
 }
 
 function findUserById(request, response, next) {
-  const { id } = request.id
+  const { id } = request.params
 
   const user = users.find((user) => user.id === id)
 
