@@ -45,7 +45,7 @@ function checksTodoExists(request, response, next) {
     return response.status(404).json({error: "User not found"})
   }
 
-  if (!typeof(id) == "number") {
+  if (typeof(id) == "number") {
     return response.status(400).json({ error: 'Invalid id' })
   }
 
