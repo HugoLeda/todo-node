@@ -11,20 +11,20 @@ app.use(express.json());
 const users = [];
 
 function checksExistsUserAccount(request, response, next) {
-  const { username } = request.headers
+  const { username } = request.headers;
 
-  const user = users.find((user) => user.username === username)
+  const user = users.find((user) => user.username === username);
 
   if (!user) {
     return response.status(404).json({error: "User not found"})
   }
 
-  request.user = user
+  request.user = user;
   return next()
 }
 
 function checksCreateTodosUserAvailability(request, response, next) {
-  const { user } = request
+  const { user } = request;
 
   if (user.pro === false) {
     if (user.todos.length >= 10) {
@@ -36,10 +36,10 @@ function checksCreateTodosUserAvailability(request, response, next) {
 }
 
 function checksTodoExists(request, response, next) {
-  const { username } = request.headers
-  const { id } = request.params
+  const { username } = request.headers;
+  const { id } = request.params;
 
-  const userExists = users.find((user) => user.username === username)
+  const userExists = users.find((user) => user.username === username);
 
   if (!userExists) {
     return response.status(404).json({error: "User not found"})
@@ -49,24 +49,24 @@ function checksTodoExists(request, response, next) {
     return response.status(400).json({ error: 'Invalid id' })
   }
 
-  const todoExists = userExists.todos.find(todo => id === todo.id)
+  const todoExists = userExists.todos.find(todo => id === todo.id);
 
   if (!todoExists) {
     return response.status(404).json({ error: 'Todo not found' })
   }
 
-  request.user = userExists
-  request.todo = todoExists
-  next()
+  request.user = userExists;
+  request.todo = todoExists;
+  next();
 }
 
 function findUserById(request, response, next) {
-  const { id } = request.params
+  const { id } = request.params;
 
-  const user = users.find((user) => user.id === id)
+  const user = users.find((user) => user.id === id);
 
   if (!user) {
-    return response.status(404).json({error: "User not found"})
+    return response.status(404).json({error: "User not found"});
   }
 
   request.user = user
